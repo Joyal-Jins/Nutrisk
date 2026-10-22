@@ -1,0 +1,617 @@
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #f3f6f4;
+    color: #26352d;
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 1050px;
+    margin: 35px auto;
+    padding: 20px;
+}
+
+.header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.header h1 {
+    font-size: 32px;
+    color: #237a4b;
+}
+
+.header p {
+    color: #6b7b70;
+}
+
+/* Main cards */
+
+.card,
+.result-card {
+    background: #ffffff;
+    border-radius: 14px;
+    padding: 25px;
+    margin-bottom: 22px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+}
+
+.card h2,
+.result-card h2 {
+    margin-bottom: 15px;
+    color: #234d35;
+}
+
+.section-description {
+    color: #738078;
+    margin-bottom: 20px;
+    font-size: 14px;
+}
+
+/* Grade and risk */
+
+.result-summary {
+    display: grid;
+    grid-template-columns: 220px 1fr;
+    gap: 20px;
+}
+
+.grade-box {
+    border-radius: 12px;
+    padding: 20px;
+    text-align: center;
+    color: white;
+}
+
+.grade {
+    font-size: 75px;
+    font-weight: bold;
+    line-height: 1.3;
+}
+
+.small-label {
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.grade-a {
+    background: #27844b;
+}
+
+.grade-b {
+    background: #78a83d;
+}
+
+.grade-c {
+    background: #e6b83b;
+    color: #26352d;
+}
+
+.grade-d {
+    background: #e58b37;
+}
+
+.grade-e {
+    background: #c94c43;
+}
+
+.risk-box {
+    padding: 20px;
+    border-radius: 12px;
+    background: #f5f7f5;
+}
+
+.risk-box h2 {
+    margin: 8px 0;
+    font-size: 25px;
+}
+
+.risk-low {
+    border-left: 6px solid #27844b;
+}
+
+.risk-medium {
+    border-left: 6px solid #e6b83b;
+}
+
+.risk-high {
+    border-left: 6px solid #c94c43;
+}
+
+/* Personal details */
+
+.details-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+}
+
+.detail-item {
+    background: #f5f8f5;
+    border-radius: 10px;
+    padding: 15px;
+}
+
+.detail-item span {
+    display: block;
+    color: #738078;
+    font-size: 13px;
+    margin-bottom: 5px;
+}
+
+.detail-item strong {
+    font-size: 17px;
+    text-transform: capitalize;
+}
+
+/* Nutritional table */
+
+.table-wrapper {
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th {
+    background: #eaf3ec;
+    color: #234d35;
+    text-align: left;
+}
+
+th,
+td {
+    padding: 13px 15px;
+    border-bottom: 1px solid #e6ebe7;
+    text-transform: capitalize;
+}
+
+tbody tr:hover {
+    background: #f7faf7;
+}
+
+/* Age-based assessment */
+
+.assessment-list {
+    display: grid;
+    gap: 18px;
+}
+
+.assessment-item {
+    border: 1px solid #e1e9e2;
+    border-radius: 12px;
+    padding: 20px;
+    background: #fbfdfb;
+}
+
+.assessment-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 15px;
+}
+
+.assessment-header h3 {
+    text-transform: capitalize;
+    color: #234d35;
+}
+
+.status {
+    padding: 5px 13px;
+    border-radius: 30px;
+    font-size: 13px;
+    font-weight: bold;
+    white-space: nowrap;
+}
+
+.status-high {
+    background: #fde4e1;
+    color: #a8322a;
+}
+
+.status-low {
+    background: #dff4e4;
+    color: #246c3b;
+}
+
+.status-within-range {
+    background: #dff4e4;
+    color: #246c3b;
+}
+
+.status-unavailable {
+    background: #e9edf0;
+    color: #52616b;
+}
+
+.assessment-details p {
+    margin: 8px 0;
+}
+
+/* Notice and disclaimer */
+
+.notice {
+    background: #fff6df;
+    padding: 15px;
+    border-radius: 8px;
+    color: #755719;
+}
+
+.disclaimer {
+    background: #eaf2ec;
+    border-radius: 12px;
+    padding: 20px;
+    font-size: 13px;
+    color: #4c6051;
+    margin-bottom: 25px;
+}
+
+.disclaimer h3 {
+    margin-bottom: 8px;
+    color: #234d35;
+}
+
+/* Buttons */
+
+.actions {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.btn {
+    display: inline-block;
+    padding: 12px 22px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 15px;
+    border: none;
+    cursor: pointer;
+}
+
+.btn-primary {
+    background: #237a4b;
+    color: white;
+}
+
+.btn-secondary {
+    background: #e0e7e1;
+    color: #234d35;
+}
+
+.btn:hover {
+    opacity: 0.88;
+}
+
+/* Responsive design */
+
+@media (max-width: 700px) {
+    .container {
+        margin: 10px auto;
+        padding: 12px;
+    }
+
+    .result-summary {
+        grid-template-columns: 1fr;
+    }
+
+    .details-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .assessment-header {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .grade {
+        font-size: 60px;
+    }
+
+    .card,
+    .result-card {
+        padding: 18px;
+    }
+}
+
+@media print {
+    body {
+        background: white;
+    }
+
+    .container {
+        max-width: 100%;
+        margin: 0;
+    }
+
+    .actions {
+        display: none;
+    }
+
+    .card,
+    .result-card {
+        box-shadow: none;
+        break-inside: avoid;
+    }
+}
+/* Improved nutrient table */
+table {
+    min-width: 500px;
+}
+
+th {
+    padding: 15px;
+    font-weight: bold;
+}
+
+td {
+    padding: 14px 15px;
+}
+
+/* Better readability */
+.result-card p,
+.card p {
+    line-height: 1.7;
+}
+
+/* Improved button interaction */
+.btn {
+    transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.btn:hover {
+    opacity: 0.9;
+    transform: translateY(-1px);
+}
+
+/* Mobile-friendly table */
+@media (max-width: 500px) {
+    .container {
+        padding: 10px;
+    }
+
+    .header h1 {
+        font-size: 27px;
+    }
+
+    .grade {
+        font-size: 55px;
+    }
+
+    .assessment-item {
+        padding: 15px;
+    }
+
+    .btn {
+        width: 100%;
+        text-align: center;
+    }
+}
+
+/* Improved print layout */
+@media print {
+    .header {
+        margin-bottom: 15px;
+    }
+
+    .card,
+    .result-card,
+    .disclaimer {
+        border: 1px solid #ddd;
+        margin-bottom: 15px;
+    }
+
+    .assessment-item {
+        break-inside: avoid;
+    }
+}
+
+
+/* Simplified SHAP explanation */
+
+.shap-card {
+    padding: 28px;
+}
+
+.shap-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 20px;
+}
+
+.shap-item {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 15px;
+    border-radius: 12px;
+    background: #f5f8f5;
+}
+
+.shap-icon {
+    width: 38px;
+    height: 38px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    font-size: 23px;
+    font-weight: 700;
+}
+
+.shap-toward {
+    background: #fde8e6;
+    color: #c0392b;
+}
+
+.shap-away {
+    background: #e2f4e8;
+    color: #217a4b;
+}
+
+.shap-neutral {
+    background: #e9ecef;
+    color: #555;
+}
+
+.shap-content strong {
+    display: block;
+    margin-bottom: 4px;
+    color: #173f31;
+}
+
+.shap-content p {
+    margin: 0;
+    line-height: 1.5;
+    color: #52645b;
+    font-size: 14px;
+}
+
+.shap-note {
+    margin-top: 18px;
+    color: #68766f;
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+@media (max-width: 600px) {
+    .shap-card {
+        padding: 18px;
+    }
+
+    .shap-item {
+        padding: 12px;
+    }
+}
+
+
+/* =====================================
+   DAILY NUTRITION PROGRESS BARS
+===================================== */
+
+.daily-nutrient-list {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px;
+    margin-top: 24px;
+}
+
+.daily-nutrient {
+    padding: 20px;
+    background: #f8fbf8;
+    border: 1px solid #dfe9e0;
+    border-radius: 14px;
+}
+
+.daily-nutrient-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 12px;
+    color: #174f3a;
+}
+
+.daily-nutrient-heading strong {
+    font-size: 17px;
+}
+
+.daily-nutrient-heading span {
+    font-size: 18px;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+.daily-progress-track {
+    width: 100%;
+    height: 12px;
+    overflow: hidden;
+    background: #e3eae4;
+    border-radius: 999px;
+}
+
+.daily-progress-fill {
+    width: var(--progress, 0%);
+    height: 100%;
+    background: #278052;
+    border-radius: 999px;
+    transition: width 0.4s ease;
+}
+
+.daily-nutrient-details {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-top: 12px;
+    color: #5d6d64;
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+.daily-guide-note {
+    margin-top: 22px;
+    padding: 14px 16px;
+    background: #edf5ee;
+    border-radius: 10px;
+    color: #435c4b;
+    font-size: 13px;
+    line-height: 1.6;
+}
+
+@media (max-width: 650px) {
+    .daily-nutrient-list {
+        grid-template-columns: 1fr;
+    }
+
+    .daily-nutrient {
+        padding: 16px;
+    }
+}
+
+
+/* Extended daily nutrition guide */
+.daily-nutrient-message,
+.daily-nutrient-suggestion {
+    white-space: normal;
+}
+
+.daily-nutrient-message {
+    margin-top: 4px;
+}
+
+.daily-nutrient-suggestion {
+    color: #435c4b;
+}
+
+.nutrient-limit .daily-progress-fill {
+    background: #d97736;
+}
+
+.nutrient-limit .daily-nutrient-heading {
+    color: #8a431f;
+}
+
+.nutrient-info .daily-progress-fill {
+    background: #6b8799;
+}
+
+.nutrient-context .daily-progress-fill {
+    background: #6484a0;
+}
+
+.daily-nutrient-message {
+    line-height: 1.5;
+}

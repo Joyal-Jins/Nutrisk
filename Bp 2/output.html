@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nutrition Analysis Results</title>
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/output.css') }}">
+</head>
+
+<body>
+<div class="container">
+
+    <header class="header">
+        <h1>FreshSense</h1>
+        <p>Packaged Food Nutrition Risk Analyzer</p>
+    </header>
+
+    <!-- Prediction summary -->
+    <section class="result-card">
+        <h2>Nutrition Analysis Result</h2>
+
+        <div class="result-summary">
+            <div class="grade-box grade-{{ grade|lower }}">
+                <span class="small-label">Predicted Grade</span>
+                <div class="grade">{{ grade }}</div>
+            </div>
+
+            <div class="risk-box risk-{{ risk|lower }}">
+                <span class="small-label">Project Risk Category</span>
+                <h2>{{ risk }} Risk</h2>
+
+                <p>
+                    {% if risk == "Low" %}
+                        The predicted grade falls in the lower-risk
+                        category under this project's classification.
+                    {% elif risk == "Medium" %}
+                        The predicted grade falls in the medium-risk
+                        category under this project's classification.
+                    {% else %}
+                        The predicted grade falls in the higher-risk
+                        category under this project's classification.
+                    {% endif %}
+                </p>
+            </div>
+        </div>
+
+        <p class="section-description">
+            This is a machine-learning prediction based on the nutrient
+            values entered. It is not an official Nutri-Score calculation
+            or a medical assessment.
+        </p>
+    </section>
+
+    <!-- Personal and food details -->
+    <section class="card">
+        <h2>Personal &amp; Food Details</h2>
+
+        <div class="details-grid">
+            <div class="detail-item">
+                <span>Food Name</span>
+                <strong>{{ food_name }}</strong>
+            </div>
+<div class="detail-item">
+                <span>Nutrition Input Basis</span>
+                <strong>
+                    {% if input_mode == "per_serving" %}
+                        Per serving
+                    {% else %}
+                        Per 100 g
+                    {% endif %}
+                </strong>
+            </div>
+
+            <div class="detail-item">
+                <span>Serving Size</span>
+                <strong>
+                    {% if serving_size is not none %}
+                        {{ serving_size }} g
+                    {% else %}
+                        Not provided
+                    {% endif %}
+                </strong>
+            </div>
+
+    
+        </div>
+    </section>
+
+    <!-- Model probabilities -->
+    <section class="card">
+        <h2>Grade Prediction Probabilities</h2>
+
+        <p class="section-description">
+            These percentages represent the model's predicted class
+            probabilities. They are not the percentage of a food's
+            nutritional quality or a person's health risk.
+        </p>
+
+        {% if probabilities %}
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                    <tr>
+                        <th>Grade</th>
+                        <th>Model Probability</th>
+                    </tr>
+                    </thead>
+
+                    <tbody>
+                    {% for letter in ["A", "B", "C", "D", "E"] %}
+                        {% if letter in probabilities %}
+                        <tr>
+                            <td>
+                                <strong>{{ letter }}</strong>
+                                {% if letter == grade %}
+                                    — Predicted grade
+                                {% endif %}
+                            </td>
+                            <td>{{ probabilities[letter] }}%</td>
+                        </tr>
+                        {% endif %}
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        {% else %}
+            <p class="notice">
+                Prediction probabilities are unavailable.
+            </p>
+        {% endif %}
+    </section>
+
+    <!-- Nutritional information -->
+    <section class="card">
+        <h2>Nutritional Information</h2>
+
+        <p class="section-description">
+            The normalized values below are the values supplied to the
+            Random Forest model, expressed per 100 g in the same units
+            expected by the training data.
+        </p>
+
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                <tr>
+                    <th>Nutrient</th>
+                    <th>Model Input per 100 g</th>
+                    <th>Unit</th>
+                </tr>
+                </thead>
+
+                <tbody>
+                {% for item in nutrient_display %}
+                <tr>
+                    <td>{{ item.name }}</td>
+                    <td>{{ item.value }}</td>
+                    <td>{{ item.unit }}</td>
+                </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <p class="notice">
+            Check that the units entered match the Open Food Facts
+            training data. In particular, do not assume that every
+            package's sodium, calcium, or iron value uses the same unit.
+        </p>
+    </section>
+
+<!-- Simplified SHAP Explanation -->
+<section class="card shap-card">
+
+    <h2>Why This Prediction?</h2>
+
+    <p class="section-description">
+        These are the main factors influencing the predicted grade.
+    </p>
+
+    {% if influences %}
+
+        <div class="shap-list">
+
+            {% for item in influences[:3] %}
+
+            <div class="shap-item">
+
+                <span class="shap-icon
+                    {% if item.direction == 'toward' %}
+                        shap-toward
+                    {% elif item.direction == 'away from' %}
+                        shap-away
+                    {% else %}
+                        shap-neutral
+                    {% endif %}">
+
+                    {% if item.direction == 'toward' %}
+                        ↑
+                    {% elif item.direction == 'away from' %}
+                        ↓
+                    {% else %}
+                        →
+                    {% endif %}
+
+                </span>
+
+                <div class="shap-content">
+
+                    <strong>{{ item.nutrient }}</strong>
+
+                    <p>
+                        {% if item.direction == 'toward' %}
+                            Pushed the model output toward Grade {{ grade }}.
+                        {% elif item.direction == 'away from' %}
+                            Pushed the model output away from Grade {{ grade }}.
+                        {% else %}
+                            Had little influence on this grade's output.
+                        {% endif %}
+                    </p>
+
+                </div>
+
+            </div>
+
+            {% endfor %}
+
+        </div>
+
+    {% else %}
+
+        <p class="notice">
+            Explanation is unavailable for this prediction.
+        </p>
+
+    {% endif %}
+
+   <!-- <p class="shap-note">
+        SHAP explains the model's prediction; it does not prove
+        that a nutrient caused the grade or determine overall health risk.
+    </p>-->
+
+</section>
+
+
+
+    <!-- Disclaimer -->
+    <section class="disclaimer">
+        <h3>Important Note</h3>
+        <p>
+            FreshSense provides an educational machine-learning prediction based on
+            the nutrient values entered. It is not an official Nutri-Score
+            calculation, a medical diagnosis, or a substitute for professional
+            nutritional advice.
+        </p>
+    </section>
+
+    <!-- Actions -->
+    <div class="actions">
+        <a href="{{ url_for('predict') }}" class="btn btn-primary">
+            Analyze Another Food
+        </a>
+
+        <button onclick="window.print()" class="btn btn-secondary">
+            Print Results
+        </button>
+    </div>
+
+</div>
+</body>
+</html>

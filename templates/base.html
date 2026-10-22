@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>
+        {% block title %}Nutrition Risk Analyzer{% endblock %}
+    </title>
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/style.css') }}"
+    >
+</head>
+
+<body>
+
+    <nav class="navbar">
+
+        <div class="logo">
+            Nutrition Risk Analyzer
+        </div>
+
+        <div class="nav-links">
+            <a href="/">Home</a>
+            <a href="/predict">Predict</a>
+            <a href="/about">About</a>
+        </div>
+
+    </nav>
+
+    <main>
+        {% block content %}
+        {% endblock %}
+    </main>
+
+    <footer>
+        <p>Machine Learning-Based Packaged Food Nutrition Risk Analyzer</p>
+    </footer>
+
+</body>
+
+</html>

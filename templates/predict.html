@@ -1,0 +1,494 @@
+{% extends "base.html" %}
+
+{% block title %}Predict Nutrition Risk{% endblock %}
+
+{% block content %}
+
+<div class="prediction-container">
+
+    <div class="prediction-header">
+        <h1>Nutrition Risk Analyzer</h1>
+        <p>
+            Enter the nutritional information available on the food package
+            to analyze its nutrition grade and risk category.
+        </p>
+    </div>
+
+
+    <form action="{{ url_for('predict') }}"
+          method="POST"
+          class="nutrition-form">
+
+
+        <!-- ==========================================
+             PERSONAL AND FOOD DETAILS
+        =========================================== -->
+
+        <h2 class="form-section-title">
+            Food Details
+        </h2>
+
+
+        <div class="form-group">
+
+            <label for="food_name">
+                Food Name
+            </label>
+
+            <input
+                type="text"
+                id="food_name"
+                name="food_name"
+                placeholder="e.g. Chocolate Biscuits"
+            >
+
+        </div>
+<!-- ==========================================
+             NUTRITION INPUT BASIS
+        =========================================== -->
+
+        <h2 class="form-section-title">
+            Nutrition Input
+        </h2>
+
+
+        <div class="form-group">
+
+            <label>
+                How is the nutrition information given
+                on the package?
+            </label>
+
+            <div class="input-mode-options">
+
+                <label>
+                    <input
+                        type="radio"
+                        name="input_mode"
+                        value="per_100g"
+                        checked
+                    >
+                    Per 100 g
+                </label>
+
+
+                <label>
+                    <input
+                        type="radio"
+                        name="input_mode"
+                        value="per_serving"
+                    >
+                    Per serving
+                </label>
+
+            </div>
+
+        </div>
+
+
+        <!-- ==========================================
+             SERVING INFORMATION
+        =========================================== -->
+
+        <div class="form-group">
+
+            <label for="serving_size">
+                Serving Size (g)
+            </label>
+
+            <input
+                type="number"
+                id="serving_size"
+                name="serving_size"
+                min="0.1"
+                step="any"
+                placeholder="e.g. 30"
+            >
+
+            <p class="form-note">
+    Enter nutrient values per 100 g, or select
+    "Per serving" and enter the serving size.
+    Use the units shown beside each field.
+</p>
+
+        </div>
+
+
+
+
+        <!-- ==========================================
+             CHILD-FOCUSED WHO CATEGORY CHECK
+        =========================================== -->
+        <h2 class="form-section-title">Child-Focused Nutrition Check</h2>
+        <p class="form-note">
+            Select the closest WHO food category. This separate rule-based check uses category-specific nutrient thresholds and does not change the Random Forest grade or SHAP explanation.
+        </p>
+        <div class="form-group">
+            <label for="child_category">Food category (WHO South-East Asia model)</label>
+            <select id="child_category" name="child_category" required>
+                <option value="">Select a category</option>
+                <option value="confectionery">1. Confectionery</option>
+                <option value="fine_bakery">2. Fine bakery wares</option>
+                <option value="ordinary_bakery">3. Bread and ordinary bakery wares</option>
+                <option value="cereals">4. Cereals</option>
+                <option value="savoury_snacks">5a. Ready-to-eat savouries</option>
+                <option value="processed_nuts">5b. Processed nuts</option>
+                <option value="fish_snacks">5c. Fish-based snacks</option>
+                <option value="fruit_veg_juice">6a. Fruit and vegetable juices</option>
+                <option value="dairy_drinks">6b. Milk and dairy-based drinks</option>
+                <option value="flavoured_drinks">6c. Water-based flavoured drinks</option>
+                <option value="tea_coffee">6d. Coffee, tea and herbal infusions</option>
+                <option value="cereal_beverages">6e. Cereal, grain and tree nut-based beverages</option>
+                <option value="frozen_desserts">7. Frozen dairy-based desserts and edible ices</option>
+                <option value="curded_desserts">8. Curded dairy-based desserts</option>
+                <option value="cheese">9. Cheese and analogues</option>
+                <option value="composite_foods">10. Composite foods (prepared foods)</option>
+                <option value="fats_oils">11. Fats, oils and fat emulsions</option>
+                <option value="pasta_noodles">12. Pasta, noodles and similar products</option>
+                <option value="fresh_meat_fish">13. Fresh/frozen meat, poultry, game, fish and seafood</option>
+                <option value="processed_meat">14a. Processed meat, poultry and game</option>
+                <option value="processed_fish">14b. Processed fish and seafood</option>
+                <option value="fresh_produce">15. Fresh/frozen fruits, vegetables and legumes</option>
+                <option value="processed_produce">16. Processed fruits and vegetables</option>
+                <option value="soy_products">17. Solid-form soybean products</option>
+                <option value="sauces">18. Sauces, dips and dressings</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="added_sugars">Added sugars (g)</label>
+            <input type="number" id="added_sugars" name="added_sugars" min="0" step="any" placeholder="Optional — enter only if stated on the label">
+            <p class="form-note">Optional. If a selected WHO category requires an added-sugar threshold and this value is not supplied, that criterion will be marked “Not assessed.” Do not estimate added sugars from total sugars.</p>
+        </div>
+
+        <!-- ==========================================
+             NUTRITIONAL INFORMATION
+        =========================================== -->
+
+        <h2 class="form-section-title">
+            Nutritional Information
+        </h2>
+
+
+        <p class="form-note">
+            Enter the nutritional values exactly as shown
+            on the package.
+        </p>
+
+
+        <!-- ENERGY -->
+
+        <div class="form-group">
+
+            <label for="energy">
+                Energy (kJ)
+            </label>
+
+            <input
+                type="number"
+                id="energy"
+                name="energy"
+                min="0"
+                step="any"
+                required
+                placeholder="e.g. 250"
+            >
+
+        </div>
+
+
+        <!-- FAT -->
+
+        <div class="form-group">
+
+            <label for="fat">
+                Fat (g)
+            </label>
+
+            <input
+                type="number"
+                id="fat"
+                name="fat"
+                min="0"
+                step="any"
+                required
+                placeholder="e.g. 12"
+            >
+
+        </div>
+
+
+        <!-- SATURATED FAT -->
+
+        <div class="form-group">
+
+            <label for="saturated_fat">
+                Saturated Fat (g)
+            </label>
+
+            <input
+                type="number"
+                id="saturated_fat"
+                name="saturated_fat"
+                min="0"
+                step="any"
+                required
+                placeholder="e.g. 5"
+            >
+
+        </div>
+
+
+        <!-- CARBOHYDRATES -->
+
+        <div class="form-group">
+
+            <label for="carbohydrates">
+                Carbohydrates (g)
+            </label>
+
+            <input
+                type="number"
+                id="carbohydrates"
+                name="carbohydrates"
+                min="0"
+                step="any"
+                required
+                placeholder="e.g. 30"
+            >
+
+        </div>
+
+
+        <!-- SUGARS -->
+
+        <div class="form-group">
+
+            <label for="sugars">
+                Sugars (g)
+            </label>
+
+            <input
+                type="number"
+                id="sugars"
+                name="sugars"
+                min="0"
+                step="any"
+                required
+                placeholder="e.g. 10"
+            >
+
+        </div>
+
+
+        <!-- SODIUM -->
+
+        <div class="form-group">
+
+            <label for="sodium">
+                Sodium (g per 100 g / serving basis)
+            </label>
+
+            <input
+                type="number"
+                id="sodium"
+                name="sodium"
+                min="0"
+                step="any"
+                required
+                placeholder="e.g. 0.4"
+            >
+
+        </div>
+
+
+        <!-- PROTEIN -->
+
+        <div class="form-group">
+
+            <label for="protein">
+                Protein (g)
+            </label>
+
+            <input
+                type="number"
+                id="protein"
+                name="protein"
+                min="0"
+                step="any"
+                required
+                placeholder="e.g. 8"
+            >
+
+        </div>
+
+
+        <!-- FIBER -->
+
+        <div class="form-group">
+
+            <label for="fiber">
+                Fiber (g)
+            </label>
+
+            <input
+                type="number"
+                id="fiber"
+                name="fiber"
+                min="0"
+                step="any"
+                required
+                placeholder="e.g. 4"
+            >
+
+        </div>
+
+
+        <!-- CHOLESTEROL -->
+
+        <div class="form-group">
+
+            <label for="cholesterol">
+                Cholesterol
+            </label>
+
+            <input
+                type="number"
+                id="cholesterol"
+                name="cholesterol"
+                min="0"
+                step="any"
+                required
+                placeholder="e.g. 20"
+            >
+
+        </div>
+
+
+        <!-- TRANS FAT -->
+
+        <div class="form-group">
+
+            <label for="trans_fat">
+                Trans Fat (g)
+            </label>
+
+            <input
+                type="number"
+                id="trans_fat"
+                name="trans_fat"
+                min="0"
+                step="any"
+                required
+                placeholder="e.g. 0"
+            >
+
+        </div>
+
+
+        <!-- CALCIUM -->
+
+        <div class="form-group">
+
+            <label for="calcium">
+                Calcium
+            </label>
+
+            <input
+                type="number"
+                id="calcium"
+                name="calcium"
+                min="0"
+                step="any"
+                required
+                placeholder="e.g. 100"
+            >
+
+        </div>
+
+
+        <!-- IRON -->
+
+        <div class="form-group">
+
+            <label for="iron">
+                Iron
+            </label>
+
+            <input
+                type="number"
+                id="iron"
+                name="iron"
+                min="0"
+                step="any"
+                required
+                placeholder="e.g. 2"
+            >
+
+        </div>
+
+
+        <!-- ADDITIVES -->
+
+        <div class="form-group">
+
+            <label for="additives">
+                Number of Additives
+            </label>
+
+            <input
+                type="number"
+                id="additives"
+                name="additives"
+                min="0"
+                step="1"
+                required
+                placeholder="e.g. 3"
+            >
+
+        </div>
+
+
+        <!-- ==========================================
+             BUTTONS
+        =========================================== -->
+
+        <div class="form-actions">
+
+            <button
+                type="submit"
+                class="predict-button"
+            >
+                Analyze Nutrition Risk
+            </button>
+
+
+            <button
+                type="reset"
+                class="reset-button"
+            >
+                Clear
+            </button>
+
+        </div>
+
+    </form>
+
+
+    <!-- ==========================================
+         ERROR MESSAGE
+    =========================================== -->
+
+    {% if error %}
+
+    <div class="error-box">
+
+        <p>{{ error }}</p>
+
+    </div>
+
+    {% endif %}
+
+
+</div>
+
+{% endblock %}

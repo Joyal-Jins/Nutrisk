@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>NutriRisk | Nutrition Risk Analyzer</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/home.css') }}">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+          rel="stylesheet">
+</head>
+
+
+<body>
+
+<!-- ================= NAVBAR ================= -->
+
+<header class="navbar">
+
+    <div class="nav-container">
+
+        <!-- Logo -->
+
+        <a href="/" class="logo">
+
+            <div class="logo-icon">
+                <span>♧</span>
+            </div>
+
+            <div class="logo-text">
+                <strong>Nutri<span>Risk</span></strong>
+                <small>Know More. Choose Better.</small>
+            </div>
+
+        </a>
+
+
+        <!-- Tagline -->
+
+        <div class="nav-tagline">
+            <span>#</span>
+            Smarter choices for a healthier you
+        </div>
+
+
+        <!-- Navigation -->
+
+        <nav class="nav-links">
+
+            <a href="/" class="active">HOME</a>
+
+            <a href="/about">ABOUT</a>
+
+            <a href="#features">FEATURES</a>
+
+            <a href="#how-it-works">HOW IT WORKS</a>
+
+            <a href="#contact">CONTACT</a>
+
+        </nav>
+
+
+        <!-- Navigation CTA -->
+
+        <a href="/predict" class="nav-button">
+            Analyze Your Food
+            <span>→</span>
+        </a>
+
+    </div>
+
+</header>
+
+
+
+<!-- ================= HERO ================= -->
+
+<section class="hero">
+
+    <!-- Decorative dots -->
+
+    <div class="hero-dots">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+
+
+    <div class="hero-container">
+
+
+        <!-- LEFT SIDE -->
+
+        <div class="hero-content">
+
+            <div class="small-label">
+                AI-POWERED NUTRITION ANALYSIS
+            </div>
+
+
+            <h1>
+                KNOW MORE.
+                <br>
+                <span>CHOOSE BETTER.</span>
+            </h1>
+
+
+            <h2>
+                AI-POWERED
+                <strong>NUTRITION RISK</strong>
+                ANALYSIS
+                <br>
+                FOR PACKAGED FOODS.
+            </h2>
+
+
+            <div class="hero-line"></div>
+
+
+            <p class="hero-description">
+
+                Enter nutritional information from any packaged
+                food and discover its nutrition risk in seconds.
+
+            </p>
+
+
+            <!-- Buttons -->
+
+            <div class="hero-buttons">
+
+                <a href="/predict" class="primary-button">
+
+                    Analyze Your Food
+
+                    <span>→</span>
+
+                </a>
+
+
+                <a href="#how-it-works" class="secondary-button">
+
+                    <span class="info-icon">i</span>
+
+                    Learn More
+
+                </a>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- RIGHT SIDE -->
+
+        <div class="hero-visual">
+
+
+            <!-- Decorative leaves -->
+
+            <div class="leaf leaf-1">🍃</div>
+            <div class="leaf leaf-2">🍃</div>
+            <div class="leaf leaf-3">🍃</div>
+
+
+            <!-- Food Products -->
+
+            <div class="food-products">
+
+
+                <!-- Granola -->
+
+                <div class="food-package granola">
+
+                    <div class="package-top">
+                        WHOLE GRAIN
+                    </div>
+
+                    <div class="package-title">
+                        GRANOLA
+                    </div>
+
+                    <div class="package-subtitle">
+                        HONEY & NUTS
+                    </div>
+
+                    <div class="package-food">
+                        ◉ ◉ ◉
+                    </div>
+
+                </div>
+
+
+
+                <!-- Tomato Soup -->
+
+                <div class="food-package soup">
+
+                    <div class="soup-icon">
+                        🍅
+                    </div>
+
+                    <div class="soup-title">
+                        TOMATO
+                    </div>
+
+                    <div class="soup-subtitle">
+                        SOUP
+                    </div>
+
+                </div>
+
+
+
+                <!-- Cookies -->
+
+                <div class="food-package cookies">
+
+                    <div class="cookie-icon">
+                        ● ●
+                    </div>
+
+                    <div class="cookie-title">
+                        OAT
+                    </div>
+
+                    <div class="cookie-subtitle">
+                        COOKIES
+                    </div>
+
+                </div>
+
+
+
+                <!-- Protein Bottle -->
+
+                <div class="food-package bottle">
+
+                    <div class="bottle-cap"></div>
+
+                    <div class="bottle-body">
+
+                        <strong>
+                            HIGH
+                        </strong>
+
+                        <strong>
+                            PROTEIN
+                        </strong>
+
+                        <small>
+                            Vanilla
+                        </small>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+
+
+            <!-- PHONE -->
+
+            <div class="phone">
+
+                <div class="phone-notch"></div>
+
+
+                <div class="phone-screen">
+
+                    <div class="phone-header">
+                        Nutrition Summary
+                    </div>
+
+
+                    <div class="nutrient-row">
+                        <span>Energy</span>
+                        <strong>250 kcal</strong>
+                    </div>
+
+                    <div class="nutrient-row">
+                        <span>Fat</span>
+                        <strong>9.2 g</strong>
+                    </div>
+
+                    <div class="nutrient-row">
+                        <span>Saturated Fat</span>
+                        <strong>3.1 g</strong>
+                    </div>
+
+                    <div class="nutrient-row">
+                        <span>Sugars</span>
+                        <strong>6.3 g</strong>
+                    </div>
+
+                    <div class="nutrient-row">
+                        <span>Sodium</span>
+                        <strong>380 mg</strong>
+                    </div>
+
+                    <div class="nutrient-row">
+                        <span>Protein</span>
+                        <strong>7.4 g</strong>
+                    </div>
+
+                    <div class="nutrient-row">
+                        <span>Fiber</span>
+                        <strong>3.0 g</strong>
+                    </div>
+
+
+                    <div class="risk-title">
+                        Nutrition Risk
+                    </div>
+
+
+                    <div class="risk-badge">
+                        Moderate Risk
+                    </div>
+
+
+                    <!-- Risk Gauge -->
+
+                    <div class="risk-gauge">
+
+                        <div class="gauge-track"></div>
+
+                        <div class="gauge-pointer"></div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- HERO STATS -->
+
+    <div class="stats-container">
+
+        <div class="stat">
+
+            <div class="stat-icon">
+                ♧
+            </div>
+
+            <div>
+                <strong>13+</strong>
+
+                <span>
+                    Key Nutrients
+                    <br>
+                    Analyzed
+                </span>
+            </div>
+
+        </div>
+
+
+        <div class="stat-divider"></div>
+
+
+        <div class="stat">
+
+            <div class="stat-icon">
+                ✓
+            </div>
+
+            <div>
+                <strong>3</strong>
+
+                <span>
+                    Risk Levels
+                    <br>
+                    Low, Moderate, High
+                </span>
+            </div>
+
+        </div>
+
+
+        <div class="stat-divider"></div>
+
+
+        <div class="stat">
+
+            <div class="stat-icon">
+                AI
+            </div>
+
+            <div>
+                <strong>ML</strong>
+
+                <span>
+                    Machine Learning
+                    <br>
+                    Based Analysis
+                </span>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- ================= HOW IT WORKS ================= -->
+
+<section class="how-section" id="how-it-works">
+
+    <div class="section-heading">
+
+        <span>HOW IT WORKS</span>
+
+        <div class="heading-line"></div>
+
+    </div>
+
+
+    <div class="steps-container">
+
+
+        <!-- Step 1 -->
+
+        <div class="step-card">
+
+            <div class="step-icon">
+                📝
+            </div>
+
+            <div class="step-number">
+                01
+            </div>
+
+            <h3>
+                Enter Nutrition Data
+            </h3>
+
+            <p>
+                Add the nutritional information
+                available on your food package.
+            </p>
+
+        </div>
+
+
+        <div class="step-arrow">
+            →
+        </div>
+
+
+        <!-- Step 2 -->
+
+        <div class="step-card">
+
+            <div class="step-icon">
+                🧠
+            </div>
+
+            <div class="step-number">
+                02
+            </div>
+
+            <h3>
+                ML Analysis
+            </h3>
+
+            <p>
+                Our machine learning model
+                analyzes the nutritional profile.
+            </p>
+
+        </div>
+
+
+        <div class="step-arrow">
+            →
+        </div>
+
+
+        <!-- Step 3 -->
+
+        <div class="step-card">
+
+            <div class="step-icon">
+                📊
+            </div>
+
+            <div class="step-number">
+                03
+            </div>
+
+            <h3>
+                Get Risk Result
+            </h3>
+
+            <p>
+                Understand the nutrition risk
+                and make better choices.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- ================= FEATURES ================= -->
+
+<section class="features-section" id="features">
+
+    <div class="section-heading">
+
+        <span>WHY USE NUTRIRISK?</span>
+
+        <div class="heading-line"></div>
+
+    </div>
+
+
+    <div class="features-container">
+
+
+        <div class="feature-card">
+
+            <div class="feature-icon">
+                🍃
+            </div>
+
+            <h3>
+                Multiple Nutrients
+            </h3>
+
+            <p>
+                Comprehensive analysis of
+                13+ nutritional attributes.
+            </p>
+
+        </div>
+
+
+
+        <div class="feature-card">
+
+            <div class="feature-icon">
+                ⚙
+            </div>
+
+            <h3>
+                ML-Powered
+            </h3>
+
+            <p>
+                Machine learning based
+                nutrition risk prediction.
+            </p>
+
+        </div>
+
+
+
+        <div class="feature-card">
+
+            <div class="feature-icon">
+                ✓
+            </div>
+
+            <h3>
+                Simple Risk Levels
+            </h3>
+
+            <p>
+                Easy-to-understand Low,
+                Moderate and High risk.
+            </p>
+
+        </div>
+
+
+
+        <div class="feature-card">
+
+            <div class="feature-icon">
+                ♡
+            </div>
+
+            <h3>
+                Healthier Choices
+            </h3>
+
+            <p>
+                Make informed decisions
+                about packaged foods.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- ================= CTA ================= -->
+
+<section class="bottom-cta">
+
+    <div>
+
+        <span>
+            READY TO ANALYZE?
+        </span>
+
+        <h2>
+            Understand your food
+            before you choose it.
+        </h2>
+
+    </div>
+
+
+    <a href="/predict" class="cta-button">
+
+        Start Analysis
+
+        <span>→</span>
+
+    </a>
+
+</section>
+
+
+
+<!-- ================= FOOTER ================= -->
+
+<footer id="contact">
+
+    <div class="footer-logo">
+        Nutri<span>Risk</span>
+    </div>
+
+    <p>
+        Machine Learning-Based Packaged Food
+        Nutrition Risk Analyzer
+    </p>
+
+    <div class="footer-links">
+
+        <a href="/">Home</a>
+        <a href="/about">About</a>
+        <a href="/predict">Analyze</a>
+
+    </div>
+
+    <div class="copyright">
+        © 2026 NutriRisk. Academic Mini Project.
+    </div>
+
+</footer>
+
+
+</body>
+</html>

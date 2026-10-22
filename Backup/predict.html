@@ -1,0 +1,474 @@
+{% extends "base.html" %}
+
+{% block title %}Predict Nutrition Risk{% endblock %}
+
+{% block content %}
+
+<div class="prediction-container">
+
+    <div class="prediction-header">
+        <h1>Nutrition Risk Analyzer</h1>
+        <p>
+            Enter the nutritional information available on the food package
+            to analyze its nutrition grade and risk category.
+        </p>
+    </div>
+
+
+    <form action="{{ url_for('predict') }}"
+          method="POST"
+          class="nutrition-form">
+
+
+        <!-- ==========================================
+             PERSONAL AND FOOD DETAILS
+        =========================================== -->
+
+        <h2 class="form-section-title">
+            Personal & Food Details
+        </h2>
+
+
+        <div class="form-group">
+
+            <label for="food_name">
+                Food Name
+            </label>
+
+            <input
+                type="text"
+                id="food_name"
+                name="food_name"
+                placeholder="e.g. Chocolate Biscuits"
+            >
+
+        </div>
+
+
+        
+<div class="form-group">
+    <label for="age">Age (years)</label>
+
+    <input
+        type="number"
+        id="age"
+        name="age"
+        min="1"
+        max="120"
+        step="1"
+        required
+        placeholder="Enter your age"
+    >
+
+    <p class="form-note">
+        Used for age-group nutritional guidance.
+        Age does not affect the machine-learning prediction.
+    </p>
+</div>
+
+
+
+        <!-- ==========================================
+             NUTRITION INPUT BASIS
+        =========================================== -->
+
+        <h2 class="form-section-title">
+            Nutrition Input
+        </h2>
+
+
+        <div class="form-group">
+
+            <label>
+                How is the nutrition information given
+                on the package?
+            </label>
+
+            <div class="input-mode-options">
+
+                <label>
+                    <input
+                        type="radio"
+                        name="input_mode"
+                        value="per_100g"
+                        checked
+                    >
+                    Per 100 g
+                </label>
+
+
+                <label>
+                    <input
+                        type="radio"
+                        name="input_mode"
+                        value="per_serving"
+                    >
+                    Per serving
+                </label>
+
+            </div>
+
+        </div>
+
+
+        <!-- ==========================================
+             SERVING INFORMATION
+        =========================================== -->
+
+        <div class="form-group">
+
+            <label for="serving_size">
+                Serving Size (g)
+            </label>
+
+            <input
+                type="number"
+                id="serving_size"
+                name="serving_size"
+                min="0.1"
+                step="any"
+                placeholder="e.g. 30"
+            >
+
+            <p class="form-note">
+    Enter nutrient values per 100 g, or select
+    "Per serving" and enter the serving size.
+    Use the units shown beside each field.
+</p>
+
+        </div>
+
+
+
+        <!-- ==========================================
+             NUTRITIONAL INFORMATION
+        =========================================== -->
+
+        <h2 class="form-section-title">
+            Nutritional Information
+        </h2>
+
+
+        <p class="form-note">
+            Enter the nutritional values exactly as shown
+            on the package.
+        </p>
+
+
+        <!-- ENERGY -->
+
+        <div class="form-group">
+
+            <label for="energy">
+                Energy (kJ)
+            </label>
+
+            <input
+                type="number"
+                id="energy"
+                name="energy"
+                min="0"
+                step="any"
+                required
+                placeholder="e.g. 250"
+            >
+
+        </div>
+
+
+        <!-- FAT -->
+
+        <div class="form-group">
+
+            <label for="fat">
+                Fat (g)
+            </label>
+
+            <input
+                type="number"
+                id="fat"
+                name="fat"
+                min="0"
+                step="any"
+                required
+                placeholder="e.g. 12"
+            >
+
+        </div>
+
+
+        <!-- SATURATED FAT -->
+
+        <div class="form-group">
+
+            <label for="saturated_fat">
+                Saturated Fat (g)
+            </label>
+
+            <input
+                type="number"
+                id="saturated_fat"
+                name="saturated_fat"
+                min="0"
+                step="any"
+                required
+                placeholder="e.g. 5"
+            >
+
+        </div>
+
+
+        <!-- CARBOHYDRATES -->
+
+        <div class="form-group">
+
+            <label for="carbohydrates">
+                Carbohydrates (g)
+            </label>
+
+            <input
+                type="number"
+                id="carbohydrates"
+                name="carbohydrates"
+                min="0"
+                step="any"
+                required
+                placeholder="e.g. 30"
+            >
+
+        </div>
+
+
+        <!-- SUGARS -->
+
+        <div class="form-group">
+
+            <label for="sugars">
+                Sugars (g)
+            </label>
+
+            <input
+                type="number"
+                id="sugars"
+                name="sugars"
+                min="0"
+                step="any"
+                required
+                placeholder="e.g. 10"
+            >
+
+        </div>
+
+
+        <!-- SODIUM -->
+
+        <div class="form-group">
+
+            <label for="sodium">
+                Sodium
+            </label>
+
+            <input
+                type="number"
+                id="sodium"
+                name="sodium"
+                min="0"
+                step="any"
+                required
+                placeholder="e.g. 400"
+            >
+
+        </div>
+
+
+        <!-- PROTEIN -->
+
+        <div class="form-group">
+
+            <label for="protein">
+                Protein (g)
+            </label>
+
+            <input
+                type="number"
+                id="protein"
+                name="protein"
+                min="0"
+                step="any"
+                required
+                placeholder="e.g. 8"
+            >
+
+        </div>
+
+
+        <!-- FIBER -->
+
+        <div class="form-group">
+
+            <label for="fiber">
+                Fiber (g)
+            </label>
+
+            <input
+                type="number"
+                id="fiber"
+                name="fiber"
+                min="0"
+                step="any"
+                required
+                placeholder="e.g. 4"
+            >
+
+        </div>
+
+
+        <!-- CHOLESTEROL -->
+
+        <div class="form-group">
+
+            <label for="cholesterol">
+                Cholesterol
+            </label>
+
+            <input
+                type="number"
+                id="cholesterol"
+                name="cholesterol"
+                min="0"
+                step="any"
+                required
+                placeholder="e.g. 20"
+            >
+
+        </div>
+
+
+        <!-- TRANS FAT -->
+
+        <div class="form-group">
+
+            <label for="trans_fat">
+                Trans Fat (g)
+            </label>
+
+            <input
+                type="number"
+                id="trans_fat"
+                name="trans_fat"
+                min="0"
+                step="any"
+                required
+                placeholder="e.g. 0"
+            >
+
+        </div>
+
+
+        <!-- CALCIUM -->
+
+        <div class="form-group">
+
+            <label for="calcium">
+                Calcium
+            </label>
+
+            <input
+                type="number"
+                id="calcium"
+                name="calcium"
+                min="0"
+                step="any"
+                required
+                placeholder="e.g. 100"
+            >
+
+        </div>
+
+
+        <!-- IRON -->
+
+        <div class="form-group">
+
+            <label for="iron">
+                Iron
+            </label>
+
+            <input
+                type="number"
+                id="iron"
+                name="iron"
+                min="0"
+                step="any"
+                required
+                placeholder="e.g. 2"
+            >
+
+        </div>
+
+
+        <!-- ADDITIVES -->
+
+        <div class="form-group">
+
+            <label for="additives">
+                Number of Additives
+            </label>
+
+            <input
+                type="number"
+                id="additives"
+                name="additives"
+                min="0"
+                step="1"
+                required
+                placeholder="e.g. 3"
+            >
+
+        </div>
+
+
+        <!-- ==========================================
+             BUTTONS
+        =========================================== -->
+
+        <div class="form-actions">
+
+            <button
+                type="submit"
+                class="predict-button"
+            >
+                Analyze Nutrition Risk
+            </button>
+
+
+            <button
+                type="reset"
+                class="reset-button"
+            >
+                Clear
+            </button>
+
+        </div>
+
+    </form>
+
+
+    <!-- ==========================================
+         ERROR MESSAGE
+    =========================================== -->
+
+    {% if error %}
+
+    <div class="error-box">
+
+        <p>{{ error }}</p>
+
+    </div>
+
+    {% endif %}
+
+
+</div>
+
+{% endblock %}

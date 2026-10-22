@@ -1,0 +1,203 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #f5f7f9;
+    color: #222;
+}
+
+/* Navigation */
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 20px 60px;
+
+    background: white;
+    border-bottom: 1px solid #ddd;
+}
+
+.logo {
+    font-size: 22px;
+    font-weight: bold;
+}
+
+.nav-links {
+    display: flex;
+    gap: 30px;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: #333;
+    font-weight: 500;
+}
+
+.nav-links a:hover {
+    color: #1f7a4d;
+}
+
+/* Prediction page */
+
+.prediction-container {
+    width: 90%;
+    max-width: 1000px;
+
+    margin: 50px auto;
+}
+
+.prediction-header {
+    text-align: center;
+    margin-bottom: 35px;
+}
+
+.prediction-header h1 {
+    font-size: 32px;
+    margin-bottom: 10px;
+}
+
+.prediction-header p {
+    color: #666;
+    font-size: 16px;
+}
+
+/* Form */
+
+.nutrition-form {
+    background: white;
+
+    padding: 35px;
+
+    border-radius: 12px;
+
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    gap: 25px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group label {
+    margin-bottom: 8px;
+
+    font-weight: 600;
+
+    font-size: 14px;
+}
+
+.form-group input {
+    padding: 12px;
+
+    border: 1px solid #ccc;
+
+    border-radius: 6px;
+
+    font-size: 15px;
+
+    outline: none;
+}
+
+.form-group input:focus {
+    border-color: #1f7a4d;
+}
+
+/* Buttons */
+
+.form-actions {
+    grid-column: 1 / -1;
+
+    display: flex;
+
+    justify-content: center;
+
+    gap: 15px;
+
+    margin-top: 15px;
+}
+
+.predict-button,
+.reset-button {
+    padding: 13px 25px;
+
+    border-radius: 6px;
+
+    font-size: 15px;
+
+    cursor: pointer;
+}
+
+.predict-button {
+    border: none;
+
+    background: #1f7a4d;
+
+    color: white;
+}
+
+.predict-button:hover {
+    background: #17613d;
+}
+
+.reset-button {
+    background: white;
+
+    border: 1px solid #bbb;
+
+    color: #333;
+}
+
+.reset-button:hover {
+    background: #f0f0f0;
+}
+
+/* Footer */
+
+footer {
+    text-align: center;
+
+    padding: 25px;
+
+    margin-top: 40px;
+
+    color: #777;
+
+    font-size: 13px;
+}
+
+/* Mobile */
+
+@media (max-width: 700px) {
+
+    .navbar {
+        padding: 18px 25px;
+
+        flex-direction: column;
+
+        gap: 15px;
+    }
+
+    .nutrition-form {
+        grid-template-columns: 1fr;
+
+        padding: 25px;
+    }
+
+    .form-actions {
+        grid-column: auto;
+
+        flex-direction: column;
+    }
+}

@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block title %}Prediction Result{% endblock %}
+
+{% block content %}
+
+<div class="prediction-container">
+
+    <div class="prediction-header">
+
+        <h1>Input Received</h1>
+
+        <p>
+            The nutritional information has been successfully submitted.
+        </p>
+
+    </div>
+
+    <div class="nutrition-form">
+
+        {% for key, value in data.items() %}
+
+        <div class="form-group">
+
+            <label>{{ key.replace("_", " ").title() }}</label>
+
+            <input
+                type="text"
+                value="{{ value }}"
+                readonly
+            >
+
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+</div>
+
+{% endblock %}
